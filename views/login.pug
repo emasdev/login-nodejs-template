@@ -3,21 +3,27 @@ extends layout
 block content
   .container 
     .row
-      .col-12
+      .col-6.m-auto
         .card
           .card-body
-            form(action='user/login' method='POST')
-              .mb-3
-                label.form-label(for='login-email') Dirección de email
-                input#login-email.form-control(type='email' aria-describedby='loginEmailHelp')
-                #loginEmailHelp.form-text Ingrese su email vinculado a su cuenta de IDM Cloud.
-              .mb-3
-                label.form-label(for='exampleInputPassword1') Password
-                input#exampleInputPassword1.form-control(type='password')
-              .mb-3.form-check
-                input#exampleCheck1.form-check-input(type='checkbox')
-                label.form-check-label(for='exampleCheck1') Recordar
-              button.btn.btn-primary(type='submit') Acceder
+             form(action='user/login' method='POST')
+              .container
+                .row
+                  h2 Acceder con su cuenta de IDM Cloud
+                  .col-12
+                    .form-group
+                      label(for='login-email') Email
+                      input#login-email.form-control(type='email')
+                      small.form-text.text-muted Inicie sesión con su correo vinculado a IDM Cloud.
+                  .col-12
+                    .form-group
+                      label(for='login-password') Contraseña
+                      input#login-password.form-control(type='password')
+                  .col-12.mt-3 
+                    .form-group.text-center
+                      button.btn.btn-primary(type='submit') Acceder
+                  
+
 
 
 
