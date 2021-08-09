@@ -3,22 +3,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  res.render("index", { title: "Emas Dev" });
+  res.render("index", { title: "IDM" });
 });
 
 /* development */
-router.get("/development", function(req, res, next) {
-  res.render("development", { title: "development" });
+router.get("/login", function(req, res, next) {
+  res.render("login", { title: "login" });
 });
 
 /* developer */
-router.get("/developer", function(req, res, next) {
-  res.render("developer", { title: "developer" });
-});
-
-/* devenir */
-router.get("/devenir", function(req, res, next) {
-  res.render("devenir", { title: "devenir" });
+router.get("/signup", function(req, res, next) {
+  res.render("signup", { title: "signup" });
 });
 
 module.exports = router;

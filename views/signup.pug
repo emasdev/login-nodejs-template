@@ -1,5 +1,43 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container 
+    .row
+      .col-6.m-auto
+        .card
+          .card-body
+            form(action='user/signup' method='POST')
+              .container
+                .row
+                  h2 Crear cuenta IDM cloud
+                  .col-12
+                    .form-group
+                      label(for='signup-nombre') Nombre
+                      input#signup-nombre.form-control(type='text')
+                  .col-12
+                    .form-group
+                      label(for='signup-apellidos') Apellidos
+                      input#signup-apellidos.form-control(type='text')
+                  .col-12
+                    .form-group
+                      label(for='signup-especialidad') Especialidad
+                      input#signup-especialidad.form-control(type='text')
+                  .col-6
+                    .form-group
+                      label(for='signup-telefono') Teléfono móvil
+                      input#signup-telefono.form-control(type='tel')
+                      small.form-text.text-muted Este debe contar con 10 digitos.
+                  .col-6
+                    .form-group
+                      label(for='signup-email') Email
+                      input#signup-email.form-control(type='email')
+                  .col-12
+                    .form-group
+                      label(for='signup-especialidad') Dirección de consultorio
+                      input#signup-especialidad.form-control(type='text')
+
+                        
+
+
+
+
