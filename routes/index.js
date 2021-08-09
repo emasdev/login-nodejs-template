@@ -3,17 +3,22 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  res.render("index", { title: "Home" });
+  res.render("index", { title: "Emas Dev" });
 });
 
-/* Crear nueva cuenta. */
-router.get("/signup", function(req, res, next) {
-  res.render("signup", { title: "Crear nueva cuenta." });
+/* development */
+router.get("/development", function(req, res, next) {
+  res.render("development", { title: "development" });
 });
 
-/* Acceder a cuenta */
-router.get("/login", function(req, res, next) {
-  res.render("login", { title: "Acceder a cuenta" });
+/* developer */
+router.get("/developer", function(req, res, next) {
+  res.render("developer", { title: "developer" });
+});
+
+/* devenir */
+router.get("/devenir", function(req, res, next) {
+  res.render("devenir", { title: "devenir" });
 });
 
 module.exports = router;

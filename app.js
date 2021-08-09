@@ -16,8 +16,13 @@ app.set("view engine", "pug");
 // Bootstrap 4 y librerías necesarias
 app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
 app.use("/js", express.static(__dirname + "/node_modules/jquery/dist"));
-app.use("/js", express.static(__dirname + "/node_modules/popper.js/dist"));
+app.use("/js", express.static(__dirname + "/node_modules/popper.js/dist/umd"));
 app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js"));
+app.use("/js", express.static(__dirname + "/node_modules/paper/dist"));
+app.use("/js", express.static(__dirname + "/node_modules/animejs/lib"));
+
+// Add local files
+app.use("/js", express.static(__dirname + "/public/javascripts"));
 
 app.use(logger("dev"));
 app.use(express.json());
