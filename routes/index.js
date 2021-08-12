@@ -6,14 +6,19 @@ router.get("/", function(req, res, next) {
   res.render("index", { title: "IDM" });
 });
 
-/* development */
+/* login */
 router.get("/login", function(req, res, next) {
   res.render("login", { title: "login" });
 });
 
-/* developer */
+/* signup */
 router.get("/signup", function(req, res, next) {
   res.render("signup", { title: "signup" });
+});
+
+/* profile */
+router.get("/profile", function(req, res, next) {
+  res.render("profile", { title: "profile" });
 });
 
 module.exports = router;

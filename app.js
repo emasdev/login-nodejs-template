@@ -1,17 +1,27 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const path = require("path");
+const express = require("express");
+const csrf = require("csurf");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
-var app = express();
+const csrfMiddleware = csrf({cookie: true});
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const app = express(); 
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
 
 // Bootstrap 4 y librerías necesarias
 app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
@@ -29,8 +39,45 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+/*
+app.all("*", function(req, res, next){
+  res.cookie("XSRF-TOKEN", req.csrfToken());
+  next();
+});
+*/
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+app.post("/usuarios/nuevo", (req, res) => {
+  console.log(req.body);
+  res.send("received");
+});
+
+app.post("/sessionLogin", (req, res) => {
+  const idToken = req.body.idToken.toString();
+
+  const expiresIn = 60 * 60 * 24 * 5 * 1000;
+
+  admin
+    .auth()
+    .createSessionCookie(idToken, { expiresIn })
+    .then(
+      (sessionCookie) => {
+        const options = { maxAge: expiresIn, httpOnly: true };
+        res.cookie("session", sessionCookie, options);
+        res.end(JSON.stringify({ status: "success" }));
+      },
+      (error) => {
+        res.status(401).send("UNAUTHORIZED REQUEST!");
+      }
+    );
+});
+
+app.get("/sessionLogout", (req, res) => {
+  res.clearCookie("session");
+  res.redirect("/login");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
