@@ -13,38 +13,38 @@ block content
                   .col-12
                     .form-group
                       label(for='signup-nombre') Nombre
-                      input#signup-nombre.form-control(type='text')
+                      input#signup-nombre.form-control(type='text', name='nombre')
                   .col-12
                     .form-group
                       label(for='signup-apellidos') Apellidos
-                      input#signup-apellidos.form-control(type='text')
+                      input#signup-apellidos.form-control(type='text', name='apellidos')
                   .col-12
                     .form-group
                       label(for='signup-especialidad') Especialidad
-                      input#signup-especialidad.form-control(type='text')
+                      input#signup-especialidad.form-control(type='text', name='especialidad')
                   .col-12
                     .form-group
-                      label(for='signup-telefono') Teléfono móvil
-                      input#signup-telefono.form-control(type='tel')
+                      label(for='signup-tel') Teléfono móvil
+                      input#signup-tel.form-control(type='tel', name='tel')
                       small.form-text.text-muted Este debe contar con 10 digitos.
                   .col-12 
                     hr
                   .col-12
                     .form-group
                       label(for='signup-email') Email
-                      input#signup-email.form-control(type='email')
+                      input#signup-email.form-control(type='email', name='tel')
                   .col-6
                     .form-group
                       label(for='signup-password') Contraseña
-                      input#signup-password.form-control(type='password')
+                      input#signup-password.form-control(type='password', name='password')
                   .col-6
                     .form-group
                       label(for='signup-cpassword') Comfirmar contraseña
-                      input#signup-cpassword.form-control(type='password')
+                      input#signup-cpassword.form-control(type='password', name='cpassword')
                   .col-12
                     .form-group
-                      label(for='signup-especialidad') Dirección de consultorio
-                      input#signup-especialidad.form-control(type='text')
+                      label(for='signup-direccion') Dirección de consultorio
+                      input#signup-direccion.form-control(type='text', name='direccion')
                   .col-12.mt-3 
                     .form-group.text-center
                       button.btn.btn-primary(type='submit') Crear cuenta

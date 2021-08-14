@@ -1,22 +1,19 @@
 const createError = require("http-errors");
 const path = require("path");
 const express = require("express");
-const csrf = require("csurf");
-const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-
-const csrfMiddleware = csrf({cookie: true});
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccountKey.json");
+const app = express(); 
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.applicationDefault(),
+  databaseURL: 'https://idm-db-default-rtdb.firebaseio.com/'
 });
 
-const app = express(); 
+const db = admin.database();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -36,21 +33,14 @@ app.use("/js", express.static(__dirname + "/public/javascripts"));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-/*
-app.all("*", function(req, res, next){
-  res.cookie("XSRF-TOKEN", req.csrfToken());
-  next();
-});
-*/
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.post("/usuarios/nuevo", (req, res) => {
-  console.log(req.body);
+  db.ref('usuarios').push(req.body);
   res.send("received");
 });
 
